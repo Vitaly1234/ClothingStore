@@ -1,0 +1,22 @@
+@import "../../../assets/_mixins.scss";
+
+.product-details {
+  @include flex-details;
+  @include form-border;
+  height: 70vh;
+  .caption {
+    @include caption;
+  }
+  .row-details {
+    display: flex;
+    justify-content: space-between;
+    width: 45%;
+    padding: 10px;
+    .details-value {
+      width: 50%;
+    }
+    ul {
+      padding-left: 20px;
+    }
+  }
+}

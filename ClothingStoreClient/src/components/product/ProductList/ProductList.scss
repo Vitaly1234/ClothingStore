@@ -1,0 +1,31 @@
+@import "../../../assets/_mixins.scss";
+.table-responsive {
+  @include form-border;
+  table {
+    display: flex;
+    flex-flow: column;
+    width: 100%;
+    word-break: break-all;
+
+    thead {
+      flex: 0 0 auto;
+    }
+
+    tbody {
+      height: 70vh;
+      flex: 1 1 auto;
+      display: block;
+      overflow: auto;
+    }
+
+    tr {
+      width: 100%;
+      display: table;
+      table-layout: fixed;
+    }
+
+    th {
+      vertical-align: middle;
+    }
+  }
+}

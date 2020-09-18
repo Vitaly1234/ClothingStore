@@ -51,7 +51,6 @@ namespace ClothingStore
 
             app.ConfigureExceptionHandler(logger);
 
-            app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseCors("DefaultPolicy");

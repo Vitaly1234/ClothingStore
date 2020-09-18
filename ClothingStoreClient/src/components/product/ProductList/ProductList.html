@@ -1,0 +1,48 @@
+<div class="product-list">
+  <b-row>
+    <b-col class="pt-4" md="2">
+      <router-link :to="{ name: 'ProductCreate' }" class="btn btn-secondary">
+        Create product
+      </router-link>
+    </b-col>
+  </b-row>
+  <br />
+  <b-row>
+    <b-col md="12">
+      <div class="table-responsive">
+        <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th>Product name</th>
+              <th>Availability</th>
+              <th>Type</th>
+              <th>Available sizes</th>
+              <th style="width: 25%;"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <product-list-row
+              v-for="product in products"
+              :key="product.id"
+              :product="product"
+              @details="detailsProduct"
+              @update="updateProduct"
+              @delete="deleteProduct"
+            />
+          </tbody>
+        </table>
+      </div>
+    </b-col>
+  </b-row>
+  <b-modal
+    ref="deleteConfirmModal"
+    title="Confirm delete action"
+    @ok="onDeleteConfirm"
+    @hide="onDeleteModalHide"
+  >
+    <p class="my-4">Are you sure that you want delete this product?</p>
+  </b-modal>
+  <b-modal ref="alertModal" :title="alertModalTitle" :ok-only="true">
+    <p class="my-4">{{alertModalContent}}</p>
+  </b-modal>
+</div>

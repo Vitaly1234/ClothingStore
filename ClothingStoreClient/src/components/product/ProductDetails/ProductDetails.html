@@ -1,0 +1,33 @@
+<div class="product-details">
+  <span class="caption">{{ product.name }}</span>
+  <div class="row-details">
+    <strong>Description:</strong>
+    <span class="details-value">
+      {{ product.description }}
+    </span>
+  </div>
+  <div class="row-details">
+    <strong>Availability:</strong>
+    <span class="details-value">
+      {{ product.availability }}
+    </span>
+  </div>
+  <div class="row-details">
+    <strong>Available from:</strong>
+    <span class="details-value">
+      {{ arrivedDate }}
+    </span>
+  </div>
+  <div class="row-details">
+    <strong>Product type:</strong>
+    <span class="details-value">
+      {{ product.type }}
+    </span>
+  </div>
+  <div class="row-details">
+    <strong>List of available sizes:</strong>
+    <ul class="details-value">
+      <li v-for="size in availableSizes">{{ size }}</li>
+    </ul>
+  </div>
+</div>

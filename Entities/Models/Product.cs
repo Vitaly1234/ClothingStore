@@ -26,6 +26,6 @@ namespace Entities.Models
         public ProductTypeEnum Type { get; set; }
 
         [Column(TypeName = "nvarchar(max)")]
-        public ProductSizeEnum Size { get; set; }
+        public ProductSizeEnum? Size { get; set; }
     }
 }

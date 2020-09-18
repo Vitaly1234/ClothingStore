@@ -3,7 +3,7 @@
     public enum ProductAvailabilityEnum
     {
         OutStock,
-        InStok,
+        InStock,
         Order,
     }
 }

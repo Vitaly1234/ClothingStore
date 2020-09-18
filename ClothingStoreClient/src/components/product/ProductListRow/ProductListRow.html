@@ -1,0 +1,19 @@
+<tr>
+  <td>{{ product.name }}</td>
+  <td>{{ product.availability }}</td>
+  <td>{{ product.type }}</td>
+  <td>{{ product.size }}</td>
+  <td style="width: 25%;">
+    <div class="buttons">
+      <b-button class="row-button" @click="onDetails">
+        Details
+      </b-button>
+      <b-button class="row-button" variant="success" @click="onUpdate">
+        Update
+      </b-button>
+      <b-button class="row-button" variant="danger" @click="onDelete">
+        Delete
+      </b-button>
+    </div>
+  </td>
+</tr>

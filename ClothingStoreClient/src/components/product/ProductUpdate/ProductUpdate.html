@@ -1,0 +1,92 @@
+<div class="update-form">
+  <form class="form" @submit.prevent="updateProduct">
+    <span class="caption">Update a product</span>
+
+    <div class="form-item">
+      <label for="name">Name:</label>
+      <input
+        class="form-item-input"
+        id="name"
+        v-model="formData.name"
+        maxlength="60"
+        required
+      />
+    </div>
+
+    <div class="form-item">
+      <label for="description">Description:</label>
+      <textarea
+        class="form-item-input"
+        id="description"
+        v-model="formData.description"
+        maxlength="300"
+      ></textarea>
+    </div>
+
+    <div class="form-item">
+      <label for="arrived">Available from:</label>
+      <input
+        class="form-item-input"
+        id="arrived"
+        v-model="formData.arrived"
+        type="date"
+      />
+    </div>
+
+    <div class="form-item">
+      <label>Availability:</label>
+      <div class="form-item-input">
+        <div v-for="(item, index) in availabilityArr" :key="index">
+          <input
+            :id="item"
+            type="radio"
+            :value="item"
+            v-model="formData.availability"
+          />
+          <label :for="item">{{ item }}</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-item">
+      <label for="type">Type:</label>
+      <select class="form-item-input" id="type" v-model="formData.type">
+        <option v-for="(item, index) in typeArr" :key="index">
+          {{ item }}
+        </option>
+      </select>
+    </div>
+
+    <div class="form-item">
+      <label>Available sizes:</label>
+      <div class="form-item-input form-checkboxes">
+        <div v-for="(item, index) in sizeArr" :key="index">
+          <input
+            :id="item"
+            type="checkbox"
+            :value="item"
+            :checked="true"
+            v-model="formData.size"
+          />
+          <label :for="item">{{ item }}</label>
+        </div>
+      </div>
+    </div>
+
+    <br /><br />
+    <div class="buttons">
+      <b-button type="submit" variant="info">Save</b-button>
+      <b-button :to="{ name: 'ProductList' }" variant="danger">
+        Cancel
+      </b-button>
+    </div>
+  </form>
+  <b-modal
+    ref="alertModal"
+    :title="alertModalTitle"
+    :ok-only="true"
+    @ok="onAlertModalOkClick"
+  >
+    <p class="my-4">{{ alertModalContent }}</p>
+  </b-modal>
+</div>

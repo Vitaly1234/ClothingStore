@@ -70,7 +70,7 @@ namespace ClothingStore.Controllers
         [HttpPut("{id}")]
         [ServiceFilter(typeof(ValidationFilterAttribute))]
         [ServiceFilter(typeof(ValidateProductExistsAttribute))]
-        public async Task<IActionResult> UpdateProduct([FromBody]ProductForUpdateDto product)
+        public async Task<IActionResult> UpdateProduct(int id, [FromBody]ProductForUpdateDto product)
         {
             var productEntity = HttpContext.Items["product"] as Product;
 
@@ -83,7 +83,7 @@ namespace ClothingStore.Controllers
 
         [HttpDelete("{id}")]
         [ServiceFilter(typeof(ValidateProductExistsAttribute))]
-        public async Task<IActionResult> DeleteProduct()
+        public async Task<IActionResult> DeleteProduct(int id)
         {
             var product = HttpContext.Items["product"] as Product;
 

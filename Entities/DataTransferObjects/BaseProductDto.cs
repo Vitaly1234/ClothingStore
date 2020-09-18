@@ -10,6 +10,6 @@ namespace Entities.DataTransferObjects
         public DateTime? Arrived { get; set; }
         public ProductAvailabilityEnum Availability { get; set; }
         public ProductTypeEnum Type { get; set; }
-        public ProductSizeEnum Size { get; set; }
+        public ProductSizeEnum? Size { get; set; }
     }
 }

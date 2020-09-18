@@ -1,0 +1,16 @@
+tr {
+  &:hover {
+    .row-button {
+      opacity: 1;
+    }
+  }
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  .row-button {
+    width: 80px;
+    opacity: 0;
+  }
+}

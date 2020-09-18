@@ -16,12 +16,11 @@ namespace Repository
 
         public async Task<PagedList<Product>> GetAllProductsAsync(ProductParameters productParameters, bool trackChanges)
         {
-            var products = await FindAll(trackChanges)
+            var products = FindAll(trackChanges)
                 .Search(productParameters.SearchTerm)
-                .Sort(productParameters.OrderBy)
-                .ToListAsync();
+                .Sort(productParameters.OrderBy);
 
-            return PagedList<Product>.ToPagedList(
+            return await PagedList<Product>.ToPagedList(
                 products,
                 productParameters.PageNumber,
                 productParameters.PageSize);

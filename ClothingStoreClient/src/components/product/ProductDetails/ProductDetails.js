@@ -15,10 +15,11 @@ export default {
         : "";
     }
   },
-  created() {
-    ProductService.get(this.$router.currentRoute.params.id).then(response => {
-      this.product = response.data;
-      this.availableSizes = this.product.size.replace(/\s/g, "").split(",");
-    });
+  async created() {
+    const response = await ProductService.get(
+      this.$router.currentRoute.params.id
+    );
+    this.product = response.data;
+    this.availableSizes = this.product.size.replace(/\s/g, "").split(",");
   }
 };

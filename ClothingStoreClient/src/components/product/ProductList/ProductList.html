@@ -1,37 +1,42 @@
 <div class="product-list">
-  <b-row>
-    <b-col class="pt-4" md="2">
-      <router-link :to="{ name: 'ProductCreate' }" class="btn btn-secondary">
-        Create product
-      </router-link>
-    </b-col>
-  </b-row>
+  <div class="search-bar">
+    <input
+      v-model="searchTerm"
+      @keyup="fetchProducts"
+      placeholder="Search..."
+    />
+    <router-link :to="{ name: 'ProductCreate' }" class="btn btn-secondary">
+      Create product
+    </router-link>
+  </div>
   <br />
   <b-row>
     <b-col md="12">
-      <div class="table-responsive">
-        <table class="table table-striped table-hover">
-          <thead>
-            <tr>
-              <th>Product name</th>
-              <th>Availability</th>
-              <th>Type</th>
-              <th>Available sizes</th>
-              <th style="width: 25%;"></th>
-            </tr>
-          </thead>
-          <tbody>
-            <product-list-row
-              v-for="product in products"
-              :key="product.id"
-              :product="product"
-              @details="detailsProduct"
-              @update="updateProduct"
-              @delete="deleteProduct"
-            />
-          </tbody>
-        </table>
-      </div>
+      <b-overlay :show="isLoading" rounded="sm">
+        <div class="table-responsive">
+          <table class="table table-striped table-hover">
+            <thead>
+              <tr>
+                <th>Product name</th>
+                <th>Availability</th>
+                <th>Type</th>
+                <th>Available sizes</th>
+                <th style="width: 25%;"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <product-list-row
+                v-for="product in products"
+                :key="product.id"
+                :product="product"
+                @details="detailsProduct"
+                @update="updateProduct"
+                @delete="deleteProduct"
+              />
+            </tbody>
+          </table>
+        </div>
+      </b-overlay>
     </b-col>
   </b-row>
   <b-modal

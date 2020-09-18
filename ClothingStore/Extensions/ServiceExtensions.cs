@@ -20,7 +20,8 @@ namespace ClothingStore.Extensions
                 options.AddPolicy("DefaultPolicy",
                     builder => builder.AllowAnyOrigin()
                     .AllowAnyMethod()
-                    .AllowAnyHeader());
+                    .AllowAnyHeader()
+                    .WithExposedHeaders("X-Pagination"));
             });
         }
 

@@ -3,8 +3,8 @@ import Axios from "axios";
 const RESOURCE_NAME = "/products";
 
 export default {
-  getAll() {
-    return Axios.get(RESOURCE_NAME);
+  getAll(searchTerm) {
+    return Axios.get(`${RESOURCE_NAME}?searchTerm=${searchTerm || ""}`);
   },
 
   get(id) {

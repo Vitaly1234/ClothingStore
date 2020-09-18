@@ -1,4 +1,11 @@
 @import "../../../assets/_mixins.scss";
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  margin: 20px 15px 0;
+  justify-content: space-between;
+}
 .table-responsive {
   @include form-border;
   table {

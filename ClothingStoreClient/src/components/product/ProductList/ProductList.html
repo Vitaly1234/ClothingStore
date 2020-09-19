@@ -54,7 +54,7 @@
           class="page-counter"
           type="number"
           :max="totalPages"
-          min="1"
+          :min="totalPages === 0 ? 0 : 1"
           v-model="currentPage"
           @change="onPageEnter"
         />

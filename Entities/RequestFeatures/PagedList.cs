@@ -15,7 +15,7 @@ namespace Entities.Models
             {
                 TotalCount = count,
                 PageSize = pageSize,
-                CurrentPage = pageNumber,
+                CurrentPage = count == 0 ? 0 : pageNumber,
                 TotalPages = (int)Math.Ceiling(count / (double)pageSize)
             };
 
@@ -30,6 +30,10 @@ namespace Entities.Models
             if (pageNumber > totalPages)
             {
                 pageNumber = totalPages;
+            }
+            if (pageNumber == 0)
+            {
+                pageNumber = 1;
             }
             var items = await source.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync();
 

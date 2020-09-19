@@ -37,6 +37,33 @@
           </table>
         </div>
       </b-overlay>
+      <div>
+        <b-button
+          class="page-btn"
+          @click="prevPage"
+          :disabled="!hasPrevious"
+          pill
+          variant="info"
+          >Prev</b-button
+        >
+        <input
+          class="page-counter"
+          type="number"
+          :max="totalPages"
+          min="1"
+          v-model="currentPage"
+          @change="onPageEnter"
+        />
+        <span> of {{totalPages}}</span>
+        <b-button
+          class="page-btn"
+          @click="nextPage"
+          :disabled="!hasNext"
+          pill
+          variant="info"
+          >Next</b-button
+        >
+      </div>
     </b-col>
   </b-row>
   <b-modal

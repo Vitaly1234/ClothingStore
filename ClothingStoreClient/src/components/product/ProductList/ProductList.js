@@ -13,7 +13,12 @@ export default {
       alertModalTitle: "",
       alertModalContent: "",
       isLoading: false,
-      searchTerm: ""
+      searchTerm: "",
+      totalPages: 1,
+      currentPage: 1,
+      pageSize: 20,
+      hasNext: false,
+      hasPrevious: false
     };
   },
   methods: {
@@ -29,12 +34,28 @@ export default {
     },
     async fetchProducts() {
       this.isLoading = true;
-      const response = await ProductService.getAll(this.searchTerm);
-      this.products = response.data;
-      this.products.forEach(x => {
-        x.arrived = new Date(x.arrived).toLocaleDateString();
-      });
-      this.isLoading = false;
+      try {
+        const response = await ProductService.getAll(
+          this.searchTerm,
+          this.currentPage,
+          this.pageSize
+        );
+        this.products = response.data;
+        this.products.forEach(x => {
+          x.arrived = new Date(x.arrived).toLocaleDateString();
+        });
+        const paginationData = JSON.parse(response.headers["x-pagination"]);
+        this.totalPages = paginationData.totalPages;
+        this.hasNext = paginationData.hasNext;
+        this.hasPrevious = paginationData.hasPrevious;
+        this.currentPage = paginationData.currentPage;
+      } catch (e) {
+        this.alertModalTitle = "Error";
+        this.alertModalContent = e.message;
+        this.$refs.alertModal.show();
+      } finally {
+        this.isLoading = false;
+      }
     },
     async onDeleteConfirm() {
       try {
@@ -51,6 +72,23 @@ export default {
     },
     onDeleteModalHide() {
       this.selectedProductId = null;
+    },
+    onPageEnter(e) {
+      const currentValue = parseInt(e.target.value);
+      if (currentValue < 1) {
+        this.currentPage = 1;
+      } else if (currentValue > this.totalPages) {
+        this.currentPage = this.totalPages;
+      }
+      this.fetchProducts();
+    },
+    nextPage: function() {
+      this.currentPage++;
+      this.fetchProducts();
+    },
+    prevPage: function() {
+      this.currentPage--;
+      this.fetchProducts();
     }
   },
   created() {

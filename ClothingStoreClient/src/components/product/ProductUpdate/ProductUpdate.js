@@ -18,7 +18,9 @@ export default {
     };
   },
   async created() {
-    await ProductService.get(this.$router.currentRoute.params.id);
+    var response = await ProductService.get(
+      this.$router.currentRoute.params.id
+    );
     const { size, arrived, ...data } = response.data;
     data.size = response.data.size
       ? response.data.size.replace(/\s/g, "").split(",")

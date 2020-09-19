@@ -5,6 +5,7 @@ using Entities.DataTransferObjects;
 using Entities.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -33,7 +34,10 @@ namespace ClothingStore.Controllers
         {
             var products = await _repository.Product.GetAllProductsAsync(productParameters, trackChanges: false);
 
-            Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(products.MetaData));
+            Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(products.MetaData, new JsonSerializerSettings
+            {
+                ContractResolver = new CamelCasePropertyNamesContractResolver()
+            }));
 
             var productsResult = _mapper.Map<IEnumerable<ProductDto>>(products);
             return Ok(productsResult);

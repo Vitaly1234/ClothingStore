@@ -3,6 +3,7 @@
 .product-details {
   @include flex-details;
   @include form-border;
+  overflow: auto;
   height: 70vh;
   .caption {
     @include caption;

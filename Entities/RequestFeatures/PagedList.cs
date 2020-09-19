@@ -23,7 +23,7 @@ namespace Entities.Models
             AddRange(items);
         }
 
-        public static async Task<PagedList<T>> ToPagedList(IQueryable<T> source, int pageNumber, int pageSize)
+        public static async Task<PagedList<T>> ToPagedListAsync(IQueryable<T> source, int pageNumber, int pageSize)
         {
             var count = source.Count();
             var totalPages = (int)Math.Ceiling(count / (double)pageSize);

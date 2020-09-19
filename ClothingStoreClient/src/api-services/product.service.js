@@ -3,9 +3,9 @@ import Axios from "axios";
 const RESOURCE_NAME = "/products";
 
 export default {
-  getAll(searchTerm, pageNumber, pageSize) {
+  getAll(searchTerm, pageNumber, pageSize, orderByStr) {
     return Axios.get(
-      `${RESOURCE_NAME}?searchTerm=${searchTerm}&pageNumber=${pageNumber}&pageSize=${pageSize}`
+      `${RESOURCE_NAME}?searchTerm=${searchTerm}&pageNumber=${pageNumber}&pageSize=${pageSize}&orderBy=${orderByStr}`
     );
   },
 

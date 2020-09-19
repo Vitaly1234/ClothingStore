@@ -18,7 +18,14 @@ export default {
       currentPage: 1,
       pageSize: 20,
       hasNext: false,
-      hasPrevious: false
+      hasPrevious: false,
+      orderByStr: "",
+      columns: [
+        { displayName: "Product name", name: "name", order: 0 },
+        { displayName: "Availability", name: "availability", order: 0 },
+        { displayName: "Type", name: "type", order: 0 },
+        { displayName: "Available sizes", name: "size", order: 0 }
+      ]
     };
   },
   methods: {
@@ -38,7 +45,8 @@ export default {
         const response = await ProductService.getAll(
           this.searchTerm,
           this.currentPage,
-          this.pageSize
+          this.pageSize,
+          this.orderByStr
         );
         this.products = response.data;
         this.products.forEach(x => {
@@ -88,6 +96,20 @@ export default {
     },
     prevPage: function() {
       this.currentPage--;
+      this.fetchProducts();
+    },
+    sort(columnName) {
+      const currentColumn = this.columns.find(x => x.name === columnName);
+      currentColumn.order =
+        currentColumn.order === 0 ? 1 : currentColumn.order === 1 ? -1 : 0;
+      this.orderByStr = this.columns
+        .filter(x => x.order !== 0)
+        .reduce(
+          (acc, item) =>
+            (acc += `${item.name} ${item.order > 0 ? "asc" : "desc"},`),
+          ""
+        )
+        .slice(0, -1);
       this.fetchProducts();
     }
   },

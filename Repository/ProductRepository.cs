@@ -20,7 +20,7 @@ namespace Repository
                 .Search(productParameters.SearchTerm)
                 .Sort(productParameters.OrderBy);
 
-            return await PagedList<Product>.ToPagedList(
+            return await PagedList<Product>.ToPagedListAsync(
                 products,
                 productParameters.PageNumber,
                 productParameters.PageSize);

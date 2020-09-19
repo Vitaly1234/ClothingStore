@@ -17,10 +17,14 @@
           <table class="table table-striped table-hover">
             <thead>
               <tr>
-                <th>Product name</th>
-                <th>Availability</th>
-                <th>Type</th>
-                <th>Available sizes</th>
+                <th v-for="column in columns" @click="sort(column.name)">
+                  {{ column.displayName }}
+                  <span
+                    class="arrow"
+                    :class="column.order > 0 ? 'asc' : column.order < 0 ? 'desc' : ''"
+                  >
+                  </span>
+                </th>
                 <th style="width: 25%;"></th>
               </tr>
             </thead>
